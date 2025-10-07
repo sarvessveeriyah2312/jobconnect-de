@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "TechCorp GmbH",
+    "logo": "https://via.placeholder.com/150",
+    "description": "Leading technology company specializing in enterprise software solutions. We help businesses transform digitally with innovative products.",
+    "location": "Berlin, Germany",
+    "industry": "Technology",
+    "size": "500-1000 employees",
+    "website": "https://techcorp.example.com",
+    "openPositions": 12
+  },
+  {
+    "id": "2",
+    "name": "Innovation Labs",
+    "logo": "https://via.placeholder.com/150",
+    "description": "Product innovation company focused on building next-generation B2B SaaS solutions for modern enterprises.",
+    "location": "Munich, Germany",
+    "industry": "SaaS",
+    "size": "100-500 employees",
+    "website": "https://innovationlabs.example.com",
+    "openPositions": 8
+  },
+  {
+    "id": "3",
+    "name": "DataFlow AG",
+    "logo": "https://via.placeholder.com/150",
+    "description": "Data analytics and AI company helping businesses make data-driven decisions with advanced machine learning.",
+    "location": "Frankfurt, Germany",
+    "industry": "Data & Analytics",
+    "size": "200-500 employees",
+    "website": "https://dataflow.example.com",
+    "openPositions": 15
+  },
+  {
+    "id": "4",
+    "name": "Creative Studios",
+    "logo": "https://via.placeholder.com/150",
+    "description": "Award-winning design agency creating exceptional digital experiences for brands worldwide.",
+    "location": "Hamburg, Germany",
+    "industry": "Design",
+    "size": "50-100 employees",
+    "website": "https://creativestudios.example.com",
+    "openPositions": 5
+  },
+  {
+    "id": "5",
+    "name": "CloudTech Solutions",
+    "logo": "https://via.placeholder.com/150",
+    "description": "Cloud infrastructure provider offering managed services and DevOps consulting for enterprises.",
+    "location": "Cologne, Germany",
+    "industry": "Cloud Computing",
+    "size": "300-500 employees",
+    "website": "https://cloudtech.example.com",
+    "openPositions": 10
+  }
+]

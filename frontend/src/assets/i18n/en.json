@@ -1,0 +1,110 @@
+{
+  "navbar": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "companies": "Companies",
+    "applications": "Applications",
+    "resumes": "Resumes",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "language": "Language",
+    "admin": "Admin"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "registerTitle": "Create Your Account",
+    "name": "Full Name",
+    "confirmPassword": "Confirm Password",
+    "alreadyAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create Account"
+  },
+  "home": {
+    "heroTitle": "Find Your Dream Job in Germany",
+    "heroSubtitle": "Connect with top companies and discover opportunities that match your skills",
+    "exploreJobs": "Explore Jobs",
+    "featuredJobs": "Featured Jobs",
+    "topCompanies": "Top Companies"
+  },
+  "resume": {
+    "uploadTitle": "Upload Your Resume",
+    "drop": "Drag & drop your resume here or click to browse",
+    "success": "Resume uploaded successfully!",
+    "title": "Resume Title",
+    "summary": "Summary",
+    "skills": "Skills (comma separated)",
+    "upload": "Upload Resume",
+    "myResumes": "My Resumes",
+    "date": "Upload Date",
+    "fileType": "File Type",
+    "actions": "Actions",
+    "view": "View",
+    "delete": "Delete"
+  },
+  "matching": {
+    "title": "Candidate-Job Matching",
+    "selectJob": "Select a Job Advertisement",
+    "results": "Matching Candidates",
+    "score": "Match Score",
+    "aiInsights": "AI Insights",
+    "viewResume": "View Resume"
+  },
+  "jobs": {
+    "title": "Browse Jobs",
+    "filters": "Filters",
+    "location": "Location",
+    "category": "Category",
+    "type": "Job Type",
+    "apply": "Apply Now",
+    "description": "Description",
+    "requirements": "Requirements",
+    "applyForJob": "Apply for this Job"
+  },
+  "companies": {
+    "title": "Browse Companies",
+    "openPositions": "Open Positions",
+    "about": "About",
+    "jobs": "Jobs"
+  },
+  "applications": {
+    "title": "My Applications",
+    "status": "Status",
+    "pending": "Pending",
+    "shortlisted": "Shortlisted",
+    "rejected": "Rejected",
+    "noApplications": "You haven't applied to any jobs yet"
+  },
+  "profile": {
+    "title": "My Profile",
+    "bio": "Bio",
+    "saveChanges": "Save Changes",
+    "changesSaved": "Profile updated successfully!"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "jobs": "Manage Jobs",
+    "companies": "Manage Companies",
+    "resumes": "Manage Resumes",
+    "statistics": "Statistics"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "selectResume": "Select a resume",
+    "submit": "Submit"
+  },
+  "footer": {
+    "copyright": "© 2025 Job Connect-DE. All rights reserved.",
+    "builtWith": "Built with Angular + TailwindCSS + shadcn/ui"
+  }
+}

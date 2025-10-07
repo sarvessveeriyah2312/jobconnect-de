@@ -1,0 +1,110 @@
+{
+  "navbar": {
+    "home": "Startseite",
+    "jobs": "Stellen",
+    "companies": "Unternehmen",
+    "applications": "Bewerbungen",
+    "resumes": "Lebensläufe",
+    "profile": "Profil",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "language": "Sprache",
+    "admin": "Admin"
+  },
+  "auth": {
+    "loginTitle": "Willkommen zurück",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "login": "Anmelden",
+    "noAccount": "Noch kein Konto?",
+    "registerHere": "Hier registrieren",
+    "registerTitle": "Konto erstellen",
+    "name": "Vollständiger Name",
+    "confirmPassword": "Passwort bestätigen",
+    "alreadyAccount": "Haben Sie schon ein Konto?",
+    "loginHere": "Hier anmelden",
+    "forgotPassword": "Passwort vergessen?",
+    "createAccount": "Konto erstellen"
+  },
+  "home": {
+    "heroTitle": "Finden Sie Ihren Traumjob in Deutschland",
+    "heroSubtitle": "Verbinden Sie sich mit Top-Unternehmen und entdecken Sie Möglichkeiten, die zu Ihren Fähigkeiten passen",
+    "exploreJobs": "Jobs erkunden",
+    "featuredJobs": "Empfohlene Jobs",
+    "topCompanies": "Top-Unternehmen"
+  },
+  "resume": {
+    "uploadTitle": "Lebenslauf hochladen",
+    "drop": "Ziehen Sie Ihren Lebenslauf hierher oder klicken Sie, um zu suchen",
+    "success": "Lebenslauf erfolgreich hochgeladen!",
+    "title": "Lebenslauf-Titel",
+    "summary": "Zusammenfassung",
+    "skills": "Fähigkeiten (durch Kommas getrennt)",
+    "upload": "Lebenslauf hochladen",
+    "myResumes": "Meine Lebensläufe",
+    "date": "Upload-Datum",
+    "fileType": "Dateityp",
+    "actions": "Aktionen",
+    "view": "Ansehen",
+    "delete": "Löschen"
+  },
+  "matching": {
+    "title": "Kandidaten-Stellen-Abgleich",
+    "selectJob": "Wählen Sie eine Stellenausschreibung aus",
+    "results": "Passende Kandidaten",
+    "score": "Übereinstimmungswert",
+    "aiInsights": "KI-Einblicke",
+    "viewResume": "Lebenslauf ansehen"
+  },
+  "jobs": {
+    "title": "Jobs durchsuchen",
+    "filters": "Filter",
+    "location": "Standort",
+    "category": "Kategorie",
+    "type": "Jobtyp",
+    "apply": "Jetzt bewerben",
+    "description": "Beschreibung",
+    "requirements": "Anforderungen",
+    "applyForJob": "Für diesen Job bewerben"
+  },
+  "companies": {
+    "title": "Unternehmen durchsuchen",
+    "openPositions": "Offene Stellen",
+    "about": "Über uns",
+    "jobs": "Jobs"
+  },
+  "applications": {
+    "title": "Meine Bewerbungen",
+    "status": "Status",
+    "pending": "Ausstehend",
+    "shortlisted": "Vorauswahl",
+    "rejected": "Abgelehnt",
+    "noApplications": "Sie haben sich noch für keine Jobs beworben"
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "bio": "Biografie",
+    "saveChanges": "Änderungen speichern",
+    "changesSaved": "Profil erfolgreich aktualisiert!"
+  },
+  "admin": {
+    "title": "Admin-Dashboard",
+    "jobs": "Jobs verwalten",
+    "companies": "Unternehmen verwalten",
+    "resumes": "Lebensläufe verwalten",
+    "statistics": "Statistiken"
+  },
+  "common": {
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "loading": "Lädt...",
+    "selectResume": "Wählen Sie einen Lebenslauf aus",
+    "submit": "Einreichen"
+  },
+  "footer": {
+    "copyright": "© 2025 Job Connect-DE. Alle Rechte vorbehalten.",
+    "builtWith": "Erstellt mit Angular + TailwindCSS + shadcn/ui"
+  }
+}

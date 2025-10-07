@@ -1,0 +1,47 @@
+[
+  {
+    "jobId": "1",
+    "candidates": [
+      {
+        "id": "1",
+        "name": "Alex Mueller",
+        "score": 92,
+        "resumeId": "1",
+        "matchFactors": ["Strong TypeScript skills", "5+ years experience", "Located in Berlin"]
+      },
+      {
+        "id": "2",
+        "name": "Sarah Schmidt",
+        "score": 85,
+        "resumeId": "2",
+        "matchFactors": ["React expertise", "Full-stack background", "Agile experience"]
+      },
+      {
+        "id": "3",
+        "name": "Michael Weber",
+        "score": 78,
+        "resumeId": "3",
+        "matchFactors": ["Node.js experience", "Team leadership", "Available immediately"]
+      }
+    ]
+  },
+  {
+    "jobId": "2",
+    "candidates": [
+      {
+        "id": "4",
+        "name": "Lisa Hoffmann",
+        "score": 88,
+        "resumeId": "4",
+        "matchFactors": ["3+ years PM experience", "B2B SaaS background", "Fluent German/English"]
+      },
+      {
+        "id": "5",
+        "name": "Thomas Fischer",
+        "score": 81,
+        "resumeId": "5",
+        "matchFactors": ["Product strategy skills", "Agile certified", "Strong analytics"]
+      }
+    ]
+  }
+]

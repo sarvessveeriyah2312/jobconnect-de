@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "title": "Senior Developer Resume",
+    "uploadDate": "2025-09-10",
+    "fileType": "PDF",
+    "summary": "Experienced full-stack developer with 8 years in web development",
+    "skills": ["JavaScript", "TypeScript", "React", "Node.js", "Angular"]
+  },
+  {
+    "id": "2",
+    "title": "Product Manager CV",
+    "uploadDate": "2025-09-12",
+    "fileType": "PDF",
+    "summary": "Product manager with strong background in B2B SaaS products",
+    "skills": ["Product Strategy", "Agile", "User Research", "Data Analysis"]
+  }
+]

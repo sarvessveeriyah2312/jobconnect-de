@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "title": "Senior Full-Stack Developer",
+    "company": "TechCorp GmbH",
+    "companyId": "1",
+    "location": "Berlin, Germany",
+    "type": "Full-time",
+    "category": "Engineering",
+    "description": "We are looking for an experienced Full-Stack Developer to join our growing team in Berlin. You will work on cutting-edge web applications using modern technologies.",
+    "requirements": ["5+ years of experience", "React & Node.js", "TypeScript", "Agile methodologies"],
+    "salary": "€70,000 - €90,000",
+    "posted": "2025-09-15"
+  },
+  {
+    "id": "2",
+    "title": "Product Manager",
+    "company": "Innovation Labs",
+    "companyId": "2",
+    "location": "Munich, Germany",
+    "type": "Full-time",
+    "category": "Product",
+    "description": "Join our product team to drive the development of innovative digital products. Lead cross-functional teams and define product strategy.",
+    "requirements": ["3+ years in product management", "Strong analytical skills", "B2B SaaS experience", "Fluent in English and German"],
+    "salary": "€60,000 - €80,000",
+    "posted": "2025-09-20"
+  },
+  {
+    "id": "3",
+    "title": "Data Scientist",
+    "company": "DataFlow AG",
+    "companyId": "3",
+    "location": "Frankfurt, Germany",
+    "type": "Full-time",
+    "category": "Data Science",
+    "description": "Analyze large datasets and build machine learning models to drive business insights. Work with state-of-the-art data infrastructure.",
+    "requirements": ["Python & R", "Machine Learning", "SQL", "Master's degree in related field"],
+    "salary": "€65,000 - €85,000",
+    "posted": "2025-09-25"
+  },
+  {
+    "id": "4",
+    "title": "UX/UI Designer",
+    "company": "Creative Studios",
+    "companyId": "4",
+    "location": "Hamburg, Germany",
+    "type": "Contract",
+    "category": "Design",
+    "description": "Design beautiful and intuitive user interfaces for web and mobile applications. Collaborate with product and engineering teams.",
+    "requirements": ["Figma expertise", "Portfolio required", "User research experience", "3+ years of experience"],
+    "salary": "€50,000 - €70,000",
+    "posted": "2025-10-01"
+  },
+  {
+    "id": "5",
+    "title": "DevOps Engineer",
+    "company": "CloudTech Solutions",
+    "companyId": "5",
+    "location": "Cologne, Germany",
+    "type": "Full-time",
+    "category": "Engineering",
+    "description": "Build and maintain cloud infrastructure using modern DevOps practices. Automate deployment pipelines and ensure system reliability.",
+    "requirements": ["AWS/Azure experience", "Kubernetes", "CI/CD pipelines", "Infrastructure as Code"],
+    "salary": "€65,000 - €90,000",
+    "posted": "2025-10-05"
+  }
+]
