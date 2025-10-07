@@ -24,7 +24,10 @@
     "alreadyAccount": "Already have an account?",
     "loginHere": "Login here",
     "forgotPassword": "Forgot password?",
-    "createAccount": "Create Account"
+    "createAccount": "Create Account",
+    "orContinueWith": "Or continue with",
+    "loginSubtitle": "Sign in to your account to continue",
+    "orSignupWith": "Or Sign up with "
   },
   "home": {
     "heroTitle": "Find Your Dream Job in Germany",

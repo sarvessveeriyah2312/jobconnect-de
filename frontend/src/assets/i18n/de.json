@@ -24,7 +24,11 @@
     "alreadyAccount": "Haben Sie schon ein Konto?",
     "loginHere": "Hier anmelden",
     "forgotPassword": "Passwort vergessen?",
-    "createAccount": "Konto erstellen"
+    "createAccount": "Konto erstellen",
+    "orContinueWith": "Oder fortfahren mit",
+   "loginSubtitle": "Melden Sie sich in Ihrem Konto an, um fortzufahren",
+   "orSignupWith": "Oder anmelden mit"
+
   },
   "home": {
     "heroTitle": "Finden Sie Ihren Traumjob in Deutschland",

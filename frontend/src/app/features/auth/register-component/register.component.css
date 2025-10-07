@@ -1,0 +1,42 @@
+.form-label {
+  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+}
+
+.form-input {
+  @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+  rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white 
+  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white py-2 px-5 rounded-lg font-medium hover:bg-blue-700 transition-all;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-2 px-5 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all;
+}
+
+.loader {
+  @apply inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin;
+}
+
+.social-btn {
+  @apply flex items-center justify-center gap-2 py-2.5 border border-gray-300 dark:border-gray-600 
+  rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 
+  hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200;
+}
+
+.relative span {
+  line-height: 1;
+}
+
+
+
+/* Animation */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

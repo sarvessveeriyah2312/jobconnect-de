@@ -1,0 +1,192 @@
+<div class="min-h-screen flex flex-col lg:flex-row bg-gray-50 dark:bg-gray-900">
+  <!-- Left Blue Panel -->
+  <div class="lg:w-1/2 bg-blue-600 text-white flex flex-col justify-center p-10">
+    <div>
+      <img src="assets/logo.svg" alt="Logo" class="w-36 mb-10" />
+      <h1 class="text-4xl font-bold mb-4 leading-tight">Let’s set up your Account</h1>
+      <p class="text-blue-100 mb-10 max-w-md">
+        Get started with your profile and business details. Set up your account in just a few easy steps.
+      </p>
+
+      <div class="bg-blue-700/40 rounded-xl p-5 max-w-sm">
+        <p class="font-semibold mb-2">“Super easy onboarding process”</p>
+        <p class="text-blue-100 text-sm mb-3">
+          The setup experience was smooth and straightforward. I got my account ready in minutes.
+        </p>
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/women/50.jpg" class="w-8 h-8 rounded-full" />
+          <div>
+            <p class="font-medium">Catherine Johns</p>
+            <p class="text-yellow-400 text-sm">★★★★★</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right White Panel -->
+  <div class="lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+    <div class="bg-white dark:bg-gray-800 w-full max-w-lg rounded-2xl shadow-md p-8 space-y-6">
+      <!-- Progress bar -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex-1 h-2 rounded-full bg-gray-200 dark:bg-gray-700 mr-2">
+          <div
+            class="h-2 bg-blue-600 rounded-full transition-all"
+            [style.width.%]="(step()/totalSteps) * 100"
+          ></div>
+        </div>
+        <span class="text-sm text-gray-500 dark:text-gray-400">
+          Step {{ step() }} of {{ totalSteps }}
+        </span>
+      </div>
+
+      <!-- Step 1 -->
+      <form *ngIf="step() === 1" (ngSubmit)="nextStep()" class="space-y-5 animate-fade-in">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Personal Details</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              [(ngModel)]="firstName"
+              name="firstName"
+              class="form-input"
+              required
+            />
+          </div>
+          <div>
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              [(ngModel)]="lastName"
+              name="lastName"
+              class="form-input"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            class="form-input"
+            required
+          />
+        </div>
+
+        <div class="space-y-3">
+          <button type="submit" class="btn-primary w-full">Next →</button>
+
+<!-- Divider -->
+<div class="relative flex items-center justify-center my-4">
+  <div class="absolute inset-0 flex items-center">
+    <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+  </div>
+  <span class="relative bg-white dark:bg-gray-800 px-3 text-sm text-gray-500 dark:text-gray-400">
+    {{ 'auth.orSignupWith' | translate }}
+  </span>
+</div>
+
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button type="button" class="social-btn">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                class="w-5 h-5"
+                alt="Google"
+              />
+              <span>Google</span>
+            </button>
+
+            <button type="button" class="social-btn">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
+                class="w-5 h-5"
+                alt="Facebook"
+              />
+              <span>Facebook</span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Step 2 -->
+      <form *ngIf="step() === 2" (ngSubmit)="nextStep()" class="space-y-5 animate-fade-in">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Location Information</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Country</label>
+            <select [(ngModel)]="country" name="country" class="form-input">
+              <option>Malaysia</option>
+              <option>Germany</option>
+              <option>United States</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">State</label>
+            <input type="text" [(ngModel)]="state" name="state" class="form-input" />
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label">Phone Number</label>
+          <input
+            type="text"
+            [(ngModel)]="phone"
+            name="phone"
+            class="form-input"
+            placeholder="+60 12 3456789"
+          />
+        </div>
+
+        <div class="flex justify-between">
+          <button type="button" (click)="prevStep()" class="btn-secondary">← Back</button>
+          <button type="submit" class="btn-primary">Next →</button>
+        </div>
+      </form>
+
+      <!-- Step 3 -->
+      <form *ngIf="step() === 3" (ngSubmit)="onSubmit()" class="space-y-5 animate-fade-in">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Account Setup</h2>
+
+        <div>
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            class="form-input"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            class="form-input"
+            required
+          />
+        </div>
+
+        <div *ngIf="error()" class="text-red-600 dark:text-red-400 text-sm text-center">
+          {{ error() }}
+        </div>
+
+        <div class="flex justify-between">
+          <button type="button" (click)="prevStep()" class="btn-secondary">← Back</button>
+          <button type="submit" class="btn-primary" [disabled]="loading()">
+            <span *ngIf="!loading()">Get Started →</span>
+            <span *ngIf="loading()" class="loader"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { NavbarComponent } from './layout/navbar.component';
-import { FooterComponent } from './layout/footer.component';
+import { NavbarComponent } from './layout/navbar-component/navbar.component';
+import { FooterComponent } from './layout/footer-component/footer.component';
 
 @Component({
   selector: 'app-root',
