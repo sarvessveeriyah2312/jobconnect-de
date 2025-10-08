@@ -1,0 +1,76 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ 'manageCompanies.title' | translate }}</h1>
+    <button
+      (click)="openAddModal()"
+      class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition"
+    >
+      + Add Company
+    </button>
+  </div>
+
+  <app-custom-table
+    [columns]="columns"
+    [data]="companies()"
+    [actions]="['edit', 'delete']"
+    (edit)="editCompany($event)"
+    (delete)="deleteCompany($event)"
+  ></app-custom-table>
+
+  <app-custom-modal
+    [visible]="showModal()"
+    (visibleChange)="showModal.set($event)"
+    title="Add / Edit Company"
+  >
+    <form class="space-y-4" (ngSubmit)="saveCompany()">
+      <div>
+        <label class="block text-sm font-medium mb-1">Company Name</label>
+        <input
+          type="text"
+          [(ngModel)]="newCompany().name"
+          name="name"
+          required
+          class="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Location</label>
+        <input
+          type="text"
+          [(ngModel)]="newCompany().location"
+          name="location"
+          required
+          class="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="newCompany().email"
+          name="email"
+          required
+          class="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700 dark:text-white"
+        />
+      </div>
+
+      <div class="flex justify-end gap-3">
+        <button
+          type="button"
+          (click)="showModal.set(false)"
+          class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </app-custom-modal>
+</div>

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavbarComponent } from './layout/navbar-component/navbar.component';
 import { FooterComponent } from './layout/footer-component/footer.component';
+import { SidebarComponent } from './layout/sidebar-component/sidebar.component';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +15,20 @@ import { FooterComponent } from './layout/footer-component/footer.component';
     RouterOutlet,
     TranslateModule,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent
   ],
-  template: `
-    <div class="flex flex-col min-h-screen">
-      <app-navbar />
-      <main class="flex-1">
-        <router-outlet />
-      </main>
-      <app-footer />
-    </div>
-  `
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  private router = inject(Router);
+  authService = inject(AuthService);
+
+  // 🔹 Hide sidebar on login/register/public routes
+  shouldShowSidebar(): boolean {
+    const currentUrl = this.router.url;
+    const publicRoutes = ['/login', '/register', '/']; // add '/' if home shouldn’t show sidebar
+    return this.authService.getIsAuthenticated()() && !publicRoutes.includes(currentUrl);
+  }
+}

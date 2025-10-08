@@ -1,0 +1,12 @@
+:host {
+  display: inline-block;
+}
+
+button {
+  @apply p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200;
+  color: inherit;
+}
+
+svg {
+  @apply w-5 h-5 text-gray-700 dark:text-gray-300;
+}

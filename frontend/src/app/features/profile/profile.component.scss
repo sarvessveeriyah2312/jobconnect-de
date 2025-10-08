@@ -1,0 +1,72 @@
+:host {
+  display: block;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.dark\:bg-gray-900 {
+  background-color: #111827;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.dark\:text-white {
+  color: #fff;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.dark\:bg-gray-800 {
+  background-color: #1f2937;
+}
+
+.rounded-xl {
+  border-radius: 1rem;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.focus\:ring-primary-500:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.bg-primary-600 {
+  background-color: #2563eb;
+}
+
+.hover\:bg-primary-700:hover {
+  background-color: #1d4ed8;
+}
+
+.transition-colors {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.text-green-700 {
+  color: #15803d;
+}
+
+.bg-green-100 {
+  background-color: #dcfce7;
+}
+
+.dark\:bg-green-900 {
+  background-color: #064e3b;
+}
+
+.dark\:text-green-300 {
+  color: #86efac;
+}

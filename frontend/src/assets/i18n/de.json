@@ -9,7 +9,12 @@
     "login": "Anmelden",
     "register": "Registrieren",
     "language": "Sprache",
-    "admin": "Admin"
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "manageCompanies": "Unternehmen verwalten",
+    "manageUsers": "Nutzer verwalten" ,
+    "trafficAnalytics": "Verkehrsdatenanalyse",
+    "rolesnpermission": "Rollen & Berechtigungen"
   },
   "auth": {
     "loginTitle": "Willkommen zurück",
@@ -110,5 +115,9 @@
   "footer": {
     "copyright": "© 2025 Job Connect-DE. Alle Rechte vorbehalten.",
     "builtWith": "Erstellt mit Angular + TailwindCSS + shadcn/ui"
+  },
+   "manageCompanies": {
+    "title": "Unternehmensverwaltung"
   }
+  
 }

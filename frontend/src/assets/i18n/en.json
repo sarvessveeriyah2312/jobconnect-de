@@ -9,7 +9,13 @@
     "login": "Login",
     "register": "Register",
     "language": "Language",
-    "admin": "Admin"
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "manageCompanies":"Manage Companies",
+    "manageUsers": "Manage Users",
+    "trafficAnalytics": "Traffic Analytics",
+    "rolesnpermission": "Roles & Permission"
+
   },
   "auth": {
     "loginTitle": "Welcome Back",
@@ -109,5 +115,8 @@
   "footer": {
     "copyright": "© 2025 Job Connect-DE. All rights reserved.",
     "builtWith": "Built with Angular + TailwindCSS + shadcn/ui"
+  },
+  "manageCompanies":{
+    "title": "Manage Companies"
   }
 }

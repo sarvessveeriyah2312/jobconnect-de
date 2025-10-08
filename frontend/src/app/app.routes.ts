@@ -12,6 +12,7 @@ import { ResumeUploadComponent } from './features/resume-upload/resume-upload.co
 import { ResumesComponent } from './features/resumes/resumes.component';
 import { CandidateMatchingComponent } from './features/candidate-matching/candidate-matching.component';
 import { AdminComponent } from './features/admin/admin.component';
+import { ManageCompaniesComponent } from './features/admin/manage-companies.component/manage-companies.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,5 +28,6 @@ export const routes: Routes = [
   { path: 'resumes', component: ResumesComponent },
   { path: 'candidate-matching', component: CandidateMatchingComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'manage-companies', component:ManageCompaniesComponent},
   { path: '**', redirectTo: '' }
 ];

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../core/services/auth.service';
+import { UserRole } from '../../../core/models/rbac.types';
 
 @Component({
   selector: 'app-login',
@@ -34,11 +35,31 @@ export class LoginComponent {
     try {
       const success = await this.authService.login(this.email, this.password);
       if (success) {
-        this.router.navigate(['/']);
+        // ✅ Get the role reactively after login
+        const role = this.authService.getUserRole()();
+
+        console.log('Logged in role:', role);
+
+        // ✅ Redirect based on role
+        switch (role as UserRole) {
+          case 'ADMIN':
+            this.router.navigate(['/admin']);
+            break;
+          case 'RECRUITER':
+            this.router.navigate(['/recruiter-dashboard']);
+            break;
+          case 'JOB_APPLICANT':
+            this.router.navigate(['/jobs']);
+            break;
+          default:
+            this.router.navigate(['/']);
+            break;
+        }
       } else {
         this.error.set('Invalid email or password.');
       }
     } catch (err) {
+      console.error('Login error:', err);
       this.error.set('An error occurred. Please try again.');
     } finally {
       this.loading.set(false);

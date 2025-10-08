@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--color-gray-50);
+}
+
+.dark-mode :host {
+  background-color: var(--color-gray-900);
+}
+
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-all duration-200;
+}
+
+.stat-number {
+  @apply text-3xl font-bold text-gray-900 dark:text-white;
+}
+
+.stat-label {
+  @apply text-gray-600 dark:text-gray-400 text-sm mb-1;
+}
