@@ -1,92 +1,180 @@
-<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 transition-colors duration-300">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">
       {{ 'profile.title' | translate }}
     </h1>
 
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
-      <form (ngSubmit)="onSubmit()" class="space-y-6">
-        <!-- Full Name -->
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-          >
-            {{ 'auth.name' | translate }}
-          </label>
-          <input
-            type="text"
-            [(ngModel)]="name"
-            name="name"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
+    <!-- Global Progress Bar
+    @if (loading() || uploadProgress() > 0) {
+      <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-6 overflow-hidden">
+        <div
+          class="h-2 bg-primary-600 dark:bg-primary-500 transition-all duration-500"
+          [style.width.%]="uploadProgress() || (loading() ? 50 : 0)"
+        ></div>
+      </div>
+    } -->
 
-        <!-- Email -->
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-          >
-            {{ 'auth.email' | translate }}
-          </label>
-          <input
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
+    <!-- Step Progress Indicator -->
+    <app-custom-multistepprogressbar [totalSteps]="totalSteps" [currentStep]="currentStep" [stepsLabels]="stepLabels">
+    </app-custom-multistepprogressbar>
 
-        <!-- Bio -->
-                     <!-- [(ngModel)]="bio" -->
 
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-          >
-            {{ 'profile.bio' | translate }}
-          </label>
-          <textarea
+    <!-- Step Sections -->
+    <form
+  (ngSubmit)="onSave()"
+  #profileForm="ngForm"
+  novalidate
+  class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 transition-colors duration-300"
+>
 
-            name="bio"
-            rows="4"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
-          ></textarea>
-        </div>
 
-        <!-- Skills -->
-               <!-- [(ngModel)]="skillsStr" -->
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-          >
-            {{ 'resume.skills' | translate }}
-          </label>
-          <input
-            type="text"
-      
-            name="skills"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
-            placeholder="JavaScript, TypeScript, Angular"
-          />
-        </div>
-
-        <!-- Success Message -->
-        @if (saveSuccess()) {
+      <!-- Step 1: Personal Info -->
+      <section *ngIf="currentStep === 1" class="space-y-10">
+        <!-- Profile Picture -->
+        <div class="flex flex-col items-center text-center space-y-4">
           <div
-            class="p-4 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-lg"
-          >
-            {{ 'profile.changesSaved' | translate }}
-          </div>
-        }
+            class="w-32 h-32 rounded-full border-4 border-gray-200 dark:border-gray-700 shadow-sm flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+            <ng-container *ngIf="profileImageBase64; else placeholder">
+              <img [src]="profileImageBase64" alt="Profile Picture" class="w-full h-full object-cover" />
+            </ng-container>
 
-        <!-- Save Button -->
-        <button
-          type="submit"
-          class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors"
-        >
-          {{ 'profile.saveChanges' | translate }}
+            <ng-template #placeholder>
+              <span class="text-sm font-medium text-center leading-tight">
+                Profile<br />Picture
+              </span>
+            </ng-template>
+          </div>
+
+          <label for="fileInput"
+            class="cursor-pointer px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition">
+            {{ 'profile.changePicture' | translate }}
+          </label>
+          <input type="file" id="fileInput" (change)="onImageUpload($event)" hidden accept="image/*" />
+        </div>
+
+
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+            {{ 'profile.personalInfo' | translate }}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ 'auth.name' | translate }}
+              </label>
+              <input type="text" [(ngModel)]="fullName" name="fullName" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                       focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                       dark:bg-gray-700 dark:text-white" placeholder="Your full name" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ 'auth.email' | translate }}
+              </label>
+              <input type="email" [(ngModel)]="email" name="email"  class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                       bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300" placeholder="your@email.com" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ 'profile.dateOfBirth' | translate }}
+              </label>
+              <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                       focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                       dark:bg-gray-700 dark:text-white" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: Contact Info -->
+      <section *ngIf="currentStep === 2">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+          {{ 'profile.contactInfo' | translate }}
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ 'profile.address' | translate }}
+            </label>
+            <input type="text" [(ngModel)]="address" name="address" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                     focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                     dark:bg-gray-700 dark:text-white" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ 'profile.city' | translate }}
+            </label>
+            <input type="text" [(ngModel)]="city" name="city" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                     focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                     dark:bg-gray-700 dark:text-white" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ 'profile.country' | translate }}
+            </label>
+            <input type="text" [(ngModel)]="country" name="country" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                     focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                     dark:bg-gray-700 dark:text-white" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ 'profile.phone' | translate }}
+            </label>
+            <input type="text" [(ngModel)]="phoneNumber" name="phoneNumber" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
+                     focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                     dark:bg-gray-700 dark:text-white" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: Confirmation -->
+      <section *ngIf="currentStep === 3" class="text-center space-y-6">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+          Confirm Your Details
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Review your entered details before saving your profile.
+        </p>
+        <pre class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-sm text-gray-800 dark:text-gray-100 text-left">
+      {{ {
+        fullName, email, address, city, country, phoneNumber, dateOfBirth
+      } | json }}
+        </pre>
+      </section>
+
+      <!-- Navigation Buttons -->
+      <div class="flex justify-between pt-6">
+        <button type="button" (click)="prevStep()" [disabled]="currentStep === 1"
+          class="text-primary-600 dark:text-primary-400 disabled:opacity-50 flex items-center gap-1">
+          ‹ Previous
         </button>
-      </form>
-    </div>
+
+        <button *ngIf="currentStep < totalSteps" type="button" (click)="nextStep()"
+          class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg transition">
+          Next ›
+        </button>
+
+<button
+  *ngIf="currentStep === totalSteps"
+  type="submit"
+  class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition"
+>
+  Save ✓
+</button>
+
+      </div>
+
+      <!-- Success Message -->
+      @if (saveSuccess()) {
+      <div class="p-4 mt-4 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-lg text-center">
+        {{ 'profile.changesSaved' | translate }}
+      </div>
+      }
+    </form>
   </div>
 </div>

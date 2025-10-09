@@ -1,19 +1,17 @@
 <aside
-  class="fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 z-30"
+  class="fixed left-0 top-16 bottom-0 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 z-40"
   [class.w-64]="!isCollapsed()"
   [class.w-16]="isCollapsed()"
+  [class.-translate-x-full]="isMobile && !isSidebarOpen"
+  [class.translate-x-0]="!isMobile || isSidebarOpen"
 >
   <div class="flex flex-col h-full">
     <!-- Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
       @if (!isCollapsed()) {
         <div>
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-            {{ currentUser()?.fullName }}
-          </p>
-          <p class="text-xs text-gray-500 dark:text-gray-400">
-            {{ getRoleLabel() }}
-          </p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ currentUser()?.fullName }}</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">{{ getRoleLabel() }}</p>
         </div>
       }
       <button
@@ -31,7 +29,7 @@
       </button>
     </div>
 
-    <!-- Navigation Items -->
+    <!-- Nav -->
     <nav class="flex-1 overflow-y-auto py-4">
       <ul class="space-y-1 px-2">
         @for (item of visibleNavItems(); track item.path) {
@@ -39,7 +37,6 @@
             <a
               [routerLink]="item.path"
               routerLinkActive="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300"
-              [routerLinkActiveOptions]="{exact: item.path === '/'}"
               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
               [class.justify-center]="isCollapsed()"
               [attr.title]="isCollapsed() ? (item.translationKey | translate) : null"
@@ -54,16 +51,12 @@
       </ul>
     </nav>
 
-    <!-- Footer -->
-    <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+    <!-- Footer inside sidebar (no gap) -->
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
       @if (!isCollapsed()) {
         <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-3 mb-3">
-          <p class="text-xs font-semibold text-primary-700 dark:text-primary-400 mb-1">
-            Access Level
-          </p>
-          <p class="text-xs text-gray-600 dark:text-gray-400">
-            {{ getPermissionSummary() }}
-          </p>
+          <p class="text-xs font-semibold text-primary-700 dark:text-primary-400 mb-1">Access Level</p>
+          <p class="text-xs text-gray-600 dark:text-gray-400">{{ getPermissionSummary() }}</p>
         </div>
       }
 
@@ -71,7 +64,6 @@
         (click)="authService.logout()"
         class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
         [class.justify-center]="isCollapsed()"
-        [attr.title]="isCollapsed() ? 'Logout' : null"
       >
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,6 +76,3 @@
     </div>
   </div>
 </aside>
-
-<!-- Content spacer -->
-<div class="transition-all duration-300" [class.ml-64]="!isCollapsed()" [class.ml-16]="isCollapsed()"></div>

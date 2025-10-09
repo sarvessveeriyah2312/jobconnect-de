@@ -5,4 +5,36 @@
 
 main {
   @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  transition: margin-left 0.3s ease;
+}
+
+footer {
+  transition: margin-left 0.3s ease;
+}
+
+.ml-64 main,
+.ml-64 footer {
+  margin-left: 16rem;
+}
+
+.ml-16 main,
+.ml-16 footer {
+  margin-left: 4rem;
+}
+
+
+aside {
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  aside {
+    position: fixed;
+    top: 4rem; // navbar height
+    height: calc(100vh - 4rem);
+    transform: translateX(-100%);
+  }
+  aside.translate-x-0 {
+    transform: translateX(0);
+  }
 }

@@ -1,17 +1,26 @@
-<div class="flex flex-col min-h-screen">
-  <app-navbar />
+<div class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-all duration-300">
+  <app-navbar class="fixed top-0 left-0 right-0 z-50" />
 
-  <div class="flex flex-1">
-    <!-- ✅ Sidebar only visible when logged in -->
-    @if (shouldShowSidebar()) {
-      <app-sidebar />
-    }
+  <!-- Sidebar (only visible for authenticated users) -->
+  @if (authService.getIsAuthenticated()()) {
+    <app-sidebar />
+  }
 
-    <!-- ✅ Main Content Area -->
-    <main class="flex-1 p-4 transition-all duration-300">
-      <router-outlet />
-    </main>
-  </div>
+  <!-- Main content -->
+  <main
+    class="flex-1 p-6 mt-16 transition-all duration-300"
+    [class.ml-64]="authService.getIsAuthenticated()() && !sidebarService.isCollapsed()"
+    [class.ml-16]="authService.getIsAuthenticated()() && sidebarService.isCollapsed()"
+  >
+    <router-outlet />
+  </main>
 
-  <app-footer />
+  <!-- Footer -->
+  <footer
+    class="bg-slate-900 text-gray-200 border-t border-slate-700 mt-auto transition-all duration-300"
+    [class.ml-64]="authService.getIsAuthenticated()() && !sidebarService.isCollapsed()"
+    [class.ml-16]="authService.getIsAuthenticated()() && sidebarService.isCollapsed()"
+  >
+    <app-footer />
+  </footer>
 </div>

@@ -7,6 +7,8 @@ import { ThemeToggleComponent } from '../../shared/components/theme-toggle.compo
 import { LanguageToggleComponent } from '../../shared/components/language-toggle-component/language-toggle.component';
 import { AuthService } from '../../core/services/auth.service';
 import { SearchService } from '../../core/services/search.service';
+import { SidebarService } from '../../core/services/sidebar.service';
+
 
 interface SearchResult {
   id: string;
@@ -34,6 +36,7 @@ interface SearchResult {
 })
 export class NavbarComponent {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+   sidebarService = inject(SidebarService);
 
   isMobileMenuOpen = signal(false);
   isUserMenuOpen = signal(false);

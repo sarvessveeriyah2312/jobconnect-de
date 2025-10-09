@@ -1,9 +1,10 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
-import { NAVIGATION_CONFIG, UserRole, ROLE_PERMISSIONS } from '../../core/models/rbac.types';
+import { SidebarService } from '../../core/services/sidebar.service';
+import { NAVIGATION_CONFIG, ROLE_PERMISSIONS } from '../../core/models/rbac.types';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,19 +14,34 @@ import { NAVIGATION_CONFIG, UserRole, ROLE_PERMISSIONS } from '../../core/models
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-  isCollapsed = signal(false);
+  constructor(public authService: AuthService, public sidebarService: SidebarService) {}
+
   currentUser = this.authService.getCurrentUser();
   userRole = this.authService.getUserRole();
+  isMobile = window.innerWidth < 1024;
+  isSidebarOpen = false;
 
   visibleNavItems = computed(() => {
     const role = this.userRole();
     return NAVIGATION_CONFIG.filter(item => item.roles.includes(role));
   });
 
-  constructor(public authService: AuthService) {}
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobile = window.innerWidth < 1024;
+    if (!this.isMobile) this.isSidebarOpen = true;
+  }
 
   toggleSidebar() {
-    this.isCollapsed.update(collapsed => !collapsed);
+    if (this.isMobile) {
+      this.isSidebarOpen = !this.isSidebarOpen;
+    } else {
+      this.sidebarService.toggle();
+    }
+  }
+
+  isCollapsed() {
+    return this.sidebarService.getState();
   }
 
   getRoleLabel(): string {

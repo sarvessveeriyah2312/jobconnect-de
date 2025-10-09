@@ -16,7 +16,14 @@ export interface RoleConfig {
   permissions: Permission[];
 }
 
+export interface FeatureToggle {
+  id: number;
+  name: string;
+  enabled: boolean;
+}
+
 export const ROLE_PERMISSIONS: Record<UserRole, RoleConfig> = {
+  
   [UserRole.ADMIN]: {
     role: UserRole.ADMIN,
     label: 'Administrator',
@@ -83,7 +90,7 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
     label: 'Roles & Permission',
     translationKey: 'navbar.rolesnpermission',
     icon: 'home',
-    path: '/manage-rolespermission',
+    path: '/roles-permission',
     roles: [UserRole.ADMIN]
   },
     {
@@ -107,6 +114,14 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
     translationKey: 'navbar.trafficAnalytics', 
     icon: 'home',
     path: '/traffic-analytics',
+    roles: [UserRole.ADMIN]
+  },
+
+      {
+    label: 'System Logs',
+    translationKey: 'navbar.systemLogs', 
+    icon: 'home',
+    path: '/system-logs',
     roles: [UserRole.ADMIN]
   },
 

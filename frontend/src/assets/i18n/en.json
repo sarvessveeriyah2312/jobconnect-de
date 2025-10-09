@@ -14,7 +14,8 @@
     "manageCompanies":"Manage Companies",
     "manageUsers": "Manage Users",
     "trafficAnalytics": "Traffic Analytics",
-    "rolesnpermission": "Roles & Permission"
+    "rolesnpermission": "Roles & Permission",
+    "systemLogs": "System Logs"
 
   },
   "auth": {
@@ -90,12 +91,31 @@
     "rejected": "Rejected",
     "noApplications": "You haven't applied to any jobs yet"
   },
-  "profile": {
-    "title": "My Profile",
-    "bio": "Bio",
-    "saveChanges": "Save Changes",
-    "changesSaved": "Profile updated successfully!"
-  },
+"profile": {
+  "title": "My Profile",
+  "subtitle": "Manage your personal information and account details",
+  "bio": "Bio",
+  "address": "Address",
+  "city": "City",
+  "country": "Country",
+  "phone": "Phone Number",
+  "dateOfBirth": "Date of Birth",
+  "changePicture": "Change Profile Picture",
+  "personalInfo": "Personal Information",
+  "contactInfo": "Contact Information",
+  "saveChanges": "Save Changes",
+  "changesSaved": "Profile updated successfully!",
+  "uploading": "Uploading...",
+  "error": "Something went wrong while updating your profile.",
+
+
+  "step1": "User Info",
+  "step2": "Location",
+  "step3": "Confirmation",
+  "step4": "Bank",
+  "step5": "Verification"
+},
+
   "admin": {
     "title": "Admin Dashboard",
     "jobs": "Manage Jobs",

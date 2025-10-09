@@ -14,7 +14,8 @@
     "manageCompanies": "Unternehmen verwalten",
     "manageUsers": "Nutzer verwalten" ,
     "trafficAnalytics": "Verkehrsdatenanalyse",
-    "rolesnpermission": "Rollen & Berechtigungen"
+    "rolesnpermission": "Rollen & Berechtigungen", 
+    "systemLogs": "Systemprotokolle"
   },
   "auth": {
     "loginTitle": "Willkommen zurück",
@@ -91,11 +92,28 @@
     "noApplications": "Sie haben sich noch für keine Jobs beworben"
   },
   "profile": {
-    "title": "Mein Profil",
-    "bio": "Biografie",
-    "saveChanges": "Änderungen speichern",
-    "changesSaved": "Profil erfolgreich aktualisiert!"
-  },
+  "title": "Mein Profil",
+  "subtitle": "Verwalte deine persönlichen Daten und Kontoinformationen",
+  "bio": "Biografie",
+  "address": "Adresse",
+  "city": "Stadt",
+  "country": "Land",
+  "phone": "Telefonnummer",
+  "dateOfBirth": "Geburtsdatum",
+  "changePicture": "Profilbild ändern",
+  "personalInfo": "Persönliche Informationen",
+  "contactInfo": "Kontaktinformationen",
+  "saveChanges": "Änderungen speichern",
+  "changesSaved": "Profil wurde erfolgreich aktualisiert!",
+  "uploading": "Wird hochgeladen...",
+  "error": "Beim Aktualisieren des Profils ist ein Fehler aufgetreten.",
+
+  "step1": "Benutzerdaten",
+  "step2": "Standort",
+  "step3": "Bestätigung",  
+  "step4": "Bank",
+  "step5": "Verifizierung"
+},
   "admin": {
     "title": "Admin-Dashboard",
     "jobs": "Jobs verwalten",

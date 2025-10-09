@@ -1,0 +1,118 @@
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CustomModalComponent } from '../../../core/components/custom-modal/custom-modal.component';
+import { CustomTableComponent } from '../../../core/components/custom-table/custom-table.component';
+
+
+interface Permission {
+  id: number;
+  code: string;
+  description: string;
+}
+
+interface Role {
+  id: number;
+  name: string;
+  description: string;
+  permissions: Permission[];
+}
+
+@Component({
+  selector: 'app-roles-permission',
+  standalone: true,
+  imports: [CommonModule, FormsModule, CustomTableComponent, CustomModalComponent],
+  templateUrl: './roles-permission.component.html',
+  styleUrls: ['./roles-permission.component.scss']
+})
+export class RolesPermissionComponent {
+  /** Signals */
+  roles = signal<Role[]>([]);
+  permissions = signal<Permission[]>([]);
+  showModal = signal(false);
+  selectedRole = signal<Partial<Role>>({});
+
+  /** Table columns */
+  columns = [
+    { field: 'name', header: 'Role' },
+    { field: 'description', header: 'Description' },
+    { field: 'permissions', header: 'Permissions' },
+  ];
+
+  constructor() {
+    // 🔹 Seed data (you can later replace with API calls)
+    this.permissions.set([
+      { id: 1, code: 'MANAGE_USERS', description: 'Manage all users' },
+      { id: 2, code: 'MANAGE_COMPANIES', description: 'Manage all companies' },
+      { id: 3, code: 'VIEW_JOBS', description: 'View job listings' },
+      { id: 4, code: 'EDIT_JOBS', description: 'Edit job listings' },
+      { id: 5, code: 'VIEW_REPORTS', description: 'Access reports dashboard' },
+    ]);
+
+    this.roles.set([
+      {
+        id: 1,
+        name: 'ADMIN',
+        description: 'Full system access',
+        permissions: this.permissions(),
+      },
+      {
+        id: 2,
+        name: 'RECRUITER',
+        description: 'Can manage jobs & applicants',
+        permissions: [this.permissions()[2], this.permissions()[3]],
+      },
+      {
+        id: 3,
+        name: 'JOB_APPLICANT',
+        description: 'Can apply and view jobs',
+        permissions: [this.permissions()[2]],
+      },
+    ]);
+  }
+
+  /** 🧭 Open modal */
+  openModal(role?: Role) {
+    this.selectedRole.set(role ? { ...role } : { permissions: [] });
+    this.showModal.set(true);
+  }
+
+  /** ✅ Save or update role */
+  saveRole() {
+    const role = this.selectedRole();
+    if (!role.name || !role.description) return;
+
+    if (!role.id) {
+      this.roles.update(list => [...list, { ...role, id: Date.now() } as Role]);
+    } else {
+      this.roles.update(list =>
+        list.map(r => (r.id === role.id ? { ...role } as Role : r))
+      );
+    }
+
+    this.showModal.set(false);
+  }
+
+  /** 🗑 Delete role */
+  deleteRole(role: Role) {
+    this.roles.update(list => list.filter(r => r.id !== role.id));
+  }
+
+  /** 🔄 Toggle permission checkbox */
+  togglePermission(permission: Permission) {
+    const role = this.selectedRole();
+    if (!role.permissions) role.permissions = [];
+
+    const exists = role.permissions.some(p => p.id === permission.id);
+    role.permissions = exists
+      ? role.permissions.filter(p => p.id !== permission.id)
+      : [...role.permissions, permission];
+
+    this.selectedRole.set({ ...role });
+  }
+
+  /** 🎨 Helper to display permissions inline */
+  getPermissionNames(perms: Permission[]): string {
+    return perms?.map(p => p.code).join(', ') || '-';
+  }
+}

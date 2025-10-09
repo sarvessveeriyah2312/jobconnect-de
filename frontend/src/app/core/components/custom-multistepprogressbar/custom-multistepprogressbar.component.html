@@ -1,0 +1,54 @@
+<div class="relative flex items-center justify-between mb-10 select-none">
+
+  <!-- Base Line (centered through circles) -->
+  <div
+    class="absolute top-1/2 left-0 w-full h-[4px] bg-gray-200 dark:bg-gray-700 rounded-full -translate-y-1/2"
+  ></div>
+
+  <!-- Active Line -->
+  <div
+    class="absolute top-1/2 left-0 h-[4px] bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-700 ease-out rounded-full -translate-y-1/2"
+    [style.width.%]="getProgressWidth()"
+  ></div>
+
+  <!-- Steps -->
+  <ng-container *ngFor="let step of [].constructor(totalSteps); let i = index">
+    <div
+      class="relative flex flex-col items-center cursor-pointer group z-10 w-full"
+      (click)="onStepClick(i + 1)"
+    >
+      <!-- Step Circle (centered exactly over the line) -->
+      <div
+        class="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium border-2 transition-all duration-500 ease-out absolute top-1/2 -translate-y-1/2"
+        [class]="getStepClasses(i + 1)"
+      >
+        <!-- Completed -->
+        <ng-container *ngIf="isCompleted(i + 1); else stepNumber">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </ng-container>
+        <ng-template #stepNumber>{{ i + 1 }}</ng-template>
+      </div>
+
+      <!-- Label (below line) -->
+      <p
+        class="text-sm mt-16 text-center font-medium transition-all duration-300"
+        [class]="getLabelClasses(i + 1)"
+      >
+        {{ (stepsLabels[i] || ('profile.step' + (i + 1))) | translate }}
+      </p>
+    </div>
+  </ng-container>
+</div>

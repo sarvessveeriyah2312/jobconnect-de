@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { UserRole } from '../models/rbac.types';
 
 export interface User {
-  id?: string;
+  userId?: string; // ✅ changed from id → userId to match backend response
   fullName: string;
   email: string;
   role?: string;
@@ -19,13 +19,13 @@ export class AuthService {
   private currentUser = signal<User | null>(null);
   private isAuthenticated = signal<boolean>(false);
 
-  // 🔹 Role signal (declared after restore)
+  // 🔹 Computed role signal (declared after restore)
   private userRole!: ReturnType<typeof computed<UserRole>>;
 
   private apiUrl = environment.apiUrl;
 
   constructor(private router: Router) {
-    // 🔹 Restore saved user before computing role
+    // 🔹 Restore session from localStorage on load
     const savedUser = localStorage.getItem('currentUser');
     const savedToken = localStorage.getItem('token');
 
@@ -34,14 +34,14 @@ export class AuthService {
       this.isAuthenticated.set(true);
     }
 
-    // 🔹 Define computed AFTER user restoration
+    // 🔹 Compute current role
     this.userRole = computed<UserRole>(() => {
       const user = this.currentUser();
       return (user?.role as UserRole) || 'GUEST';
     });
   }
 
-  // 🔹 Expose readonly reactive getters
+  // 🔹 Readonly reactive accessors
   getCurrentUser() {
     return this.currentUser.asReadonly();
   }
@@ -54,38 +54,61 @@ export class AuthService {
     return this.userRole;
   }
 
-  // 🔹 Login with backend
+  // ==========================================================
+  // 🔹 LOGIN
+  // ==========================================================
   async login(email: string, password: string): Promise<boolean> {
-    try {
-      const response = await fetch(`${this.apiUrl}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+  try {
+    const response = await fetch(`${this.apiUrl}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-      if (!response.ok) return false;
-      const data = await response.json();
-
-      const user: User = {
-        fullName: data.fullName,
-        email: data.email,
-        role: data.role,
-        token: data.token
-      };
-
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      localStorage.setItem('token', data.token);
-
-      this.currentUser.set(user);
-      this.isAuthenticated.set(true);
-      return true;
-    } catch (err) {
-      console.error('Login error:', err);
+    if (!response.ok) {
+      console.error('Login failed with status', response.status);
       return false;
     }
-  }
 
-  // 🔹 Register a new user
+    const data = await response.json();
+    console.log('Login response from backend:', data); // <-- Check keys here
+
+    // ✅ Debug safeguard: detect userId under multiple possible keys
+    const id =
+      data.userId || data.id || data.uid || null;
+
+    if (!id) {
+      console.warn('No userId found in backend response:', data);
+    }
+
+    const user: User = {
+      userId: id,
+      fullName: data.fullName,
+      email: data.email,
+      role: data.role,
+      token: data.token
+    };
+
+    // ✅ Save to localStorage
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('token', data.token);
+
+    // ✅ Update reactive signals
+    this.currentUser.set(user);
+    this.isAuthenticated.set(true);
+
+    console.log('✅ Stored currentUser in localStorage:', user);
+    return true;
+  } catch (err) {
+    console.error('Login error:', err);
+    return false;
+  }
+}
+
+
+  // ==========================================================
+  // 🔹 REGISTER
+  // ==========================================================
   async register(
     fullName: string,
     email: string,
@@ -99,10 +122,16 @@ export class AuthService {
         body: JSON.stringify({ fullName, email, password, role })
       });
 
-      if (!response.ok) return false;
+      if (!response.ok) {
+        console.error('Registration failed with status', response.status);
+        return false;
+      }
+
       const data = await response.json();
+      console.log('Register response from backend:', data);
 
       const user: User = {
+        userId: data.userId,
         fullName: data.fullName,
         email: data.email,
         role: data.role,
@@ -114,6 +143,7 @@ export class AuthService {
 
       this.currentUser.set(user);
       this.isAuthenticated.set(true);
+
       return true;
     } catch (err) {
       console.error('Registration error:', err);
@@ -121,7 +151,9 @@ export class AuthService {
     }
   }
 
-  // 🔹 Logout and clear session
+  // ==========================================================
+  // 🔹 LOGOUT
+  // ==========================================================
   logout() {
     this.currentUser.set(null);
     this.isAuthenticated.set(false);
@@ -130,7 +162,9 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  // 🔹 Update user profile (frontend only)
+  // ==========================================================
+  // 🔹 PROFILE UPDATE (frontend-only cache)
+  // ==========================================================
   updateProfile(updates: Partial<User>) {
     const current = this.currentUser();
     if (current) {
@@ -140,7 +174,9 @@ export class AuthService {
     }
   }
 
-  // 🔹 Helper to get JWT
+  // ==========================================================
+  // 🔹 TOKEN GETTER
+  // ==========================================================
   getToken(): string | null {
     return localStorage.getItem('token');
   }
