@@ -15,7 +15,12 @@
     "manageUsers": "Nutzer verwalten" ,
     "trafficAnalytics": "Verkehrsdatenanalyse",
     "rolesnpermission": "Rollen & Berechtigungen", 
-    "systemLogs": "Systemprotokolle"
+    "systemLogs": "Systemprotokolle",
+    "userList": "Nutzerliste",
+    "createUser": "Nutzer erstellen",
+    "rolesPermissions": "Rollen & Berechtigungen",
+    "sessionManager": "Sitzungsverwaltung",
+    "userAccessPolicy": "Zugriffsrichtlinie für Benutzer"
   },
   "auth": {
     "loginTitle": "Willkommen zurück",
@@ -136,6 +141,28 @@
   },
    "manageCompanies": {
     "title": "Unternehmensverwaltung"
-  }
-  
+  },
+
+  "sessionManager": {
+  "title": "Sitzungsverwaltung",
+  "subtitle": "Überwachen und steuern Sie aktive Benutzersitzungen.",
+  "terminateAll": "Alle beenden",
+  "loading": "Sitzungen werden geladen...",
+  "noSessions": "Keine aktiven Sitzungen gefunden",
+  "table": {
+    "user": "Benutzer",
+    "role": "Rolle",
+    "ip": "IP-Adresse",
+    "device": "Gerät",
+    "loginTime": "Anmeldezeit",
+    "lastActive": "Letzte Aktivität",
+    "status": "Status"
+  },
+    "stats": {
+    "totalSessions": "Gesamte Sitzungen",
+    "activeNow": "Jetzt aktiv",
+    "avgDuration": "Durchschn. Dauer",
+    "terminated": "Beendet"
+  } 
+} 
 }

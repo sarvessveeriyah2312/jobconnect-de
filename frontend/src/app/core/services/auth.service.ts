@@ -23,6 +23,7 @@ export class AuthService {
   private userRole!: ReturnType<typeof computed<UserRole>>;
 
   private apiUrl = environment.apiUrl;
+  sessionManagerService: any;
 
   constructor(private router: Router) {
     // 🔹 Restore session from localStorage on load
@@ -152,15 +153,44 @@ export class AuthService {
   }
 
   // ==========================================================
-  // 🔹 LOGOUT
-  // ==========================================================
-  logout() {
-    this.currentUser.set(null);
-    this.isAuthenticated.set(false);
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
-    this.router.navigate(['/']);
+// 🔹 LOGOUT (with correct session termination)
+// ==========================================================
+async logout() {
+  const current = this.currentUser();
+
+  if (current?.email) {
+    try {
+      // 1️⃣ Get all current sessions
+      const sessions = await this.sessionManagerService.getSessions().toPromise();
+
+      // 2️⃣ Find the matching session by username/email
+      const mySession = sessions?.find(
+        (s: { username: string; status: string; }) => s.username.toLowerCase() === current.email.toLowerCase() && s.status === 'active'
+      );
+
+      if (mySession) {
+        // 3️⃣ Terminate the correct session by ID
+        await this.sessionManagerService.terminateSession(mySession.id).toPromise();
+        console.log('Session terminated for user:', current.email);
+      } else {
+        console.warn('No matching active session found for', current.email);
+      }
+    } catch (err) {
+      console.warn('Failed to terminate backend session:', err);
+    }
   }
+
+  // 🔹 4️⃣ Local cleanup
+  this.currentUser.set(null);
+  this.isAuthenticated.set(false);
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('token');
+
+  // 🔹 5️⃣ Redirect to login
+  await this.router.navigate(['/login']);
+  console.log('User logged out and session cleared.');
+}
+
 
   // ==========================================================
   // 🔹 PROFILE UPDATE (frontend-only cache)

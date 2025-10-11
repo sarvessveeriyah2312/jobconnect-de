@@ -3,6 +3,58 @@
     animation: slideDown 0.2s ease-out;
   }
 
+  // Enhanced hover effects
+  tr {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Expandable row animations
+  .expanded-row {
+    animation: expandRow 0.3s ease-out;
+    
+    td {
+      animation: fadeIn 0.3s ease-out 0.1s both;
+    }
+  }
+
+  // Density specific styles
+  &.density-compact {
+    td, th {
+      @apply py-2;
+    }
+    
+    .text-sm {
+      font-size: 0.875rem;
+    }
+  }
+
+  // Selection styles
+  .selected-row {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      @apply bg-blue-500;
+    }
+  }
+
+  // Loading animation
+  .loading-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
   @keyframes slideDown {
     from {
       opacity: 0;
@@ -14,51 +66,51 @@
     }
   }
 
-  // Hover effects
-  tr {
-    transition: background-color 0.15s ease-in-out;
-  }
-
-  // Checkbox styling
-  input[type="checkbox"] {
-    &:focus {
-      @apply ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-800;
+  @keyframes expandRow {
+    from {
+      opacity: 0;
+      max-height: 0;
+      transform: scaleY(0.8);
     }
-  }
-
-  // Dropdown animation
-  .relative > div {
-    animation: fadeIn 0.1s ease-out;
+    to {
+      opacity: 1;
+      max-height: 500px;
+      transform: scaleY(1);
+    }
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: translateY(-10px);
     }
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
   }
 
-
-  th {
-  user-select: none;
-  transition: color 0.15s ease, background-color 0.15s ease;
-
-  &:hover {
-    color: #2563eb; // blue-600
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
-}
 
-tr {
-  transition: background-color 0.15s ease-in-out;
-}
-
-
-  // Pagination active state
-  .bg-blue-50 {
-    @apply dark:bg-blue-900/30;
+  // Responsive improvements
+  @media (max-width: 768px) {
+    .table-header-actions {
+      @apply flex-col space-y-3;
+    }
+    
+    .bulk-actions-bar {
+      @apply px-4 py-3;
+      
+      .bulk-actions {
+        @apply flex-wrap justify-start;
+      }
+    }
   }
 }

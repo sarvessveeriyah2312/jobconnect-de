@@ -15,7 +15,12 @@
     "manageUsers": "Manage Users",
     "trafficAnalytics": "Traffic Analytics",
     "rolesnpermission": "Roles & Permission",
-    "systemLogs": "System Logs"
+    "systemLogs": "System Logs",
+    "userList": "User List",
+    "createUser": "Manage User",
+    "rolesPermissions": "Roles & Permission",
+    "sessionManager": "Session Manager",
+    "userAccessPolicy": "User Access Policy"
 
   },
   "auth": {
@@ -138,5 +143,28 @@
   },
   "manageCompanies":{
     "title": "Manage Companies"
+  },
+
+"sessionManager": {
+  "title": "Session Manager",
+  "subtitle": "Monitor and control active user sessions.",
+  "terminateAll": "Terminate All",
+  "loading": "Loading sessions...",
+  "noSessions": "No active sessions found",
+  "table": {
+    "user": "User",
+    "role": "Role",
+    "ip": "IP Address",
+    "device": "Device",
+    "loginTime": "Login Time",
+    "lastActive": "Last Active",
+    "status": "Status"
+  },
+  "stats": {
+    "totalSessions": "Total Sessions",
+    "activeNow": "Active Now",
+    "avgDuration": "Avg Duration",
+    "terminated": "Terminated"
   }
+}
 }

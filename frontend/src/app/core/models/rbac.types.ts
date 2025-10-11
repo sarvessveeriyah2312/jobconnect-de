@@ -87,13 +87,6 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
     roles: [UserRole.ADMIN]
   },
     {
-    label: 'Roles & Permission',
-    translationKey: 'navbar.rolesnpermission',
-    icon: 'home',
-    path: '/roles-permission',
-    roles: [UserRole.ADMIN]
-  },
-    {
     label: 'Manage Companies',
     translationKey: 'navbar.manageCompanies', 
     icon: 'home',
@@ -101,12 +94,35 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
     roles: [UserRole.ADMIN]
   },
 
-   {
+  {
     label: 'Manage User',
-    translationKey: 'navbar.manageUsers', 
-    icon: 'home',
+    translationKey: 'navbar.manageUsers',
+    icon: 'users',
     path: '/manage-users',
-    roles: [UserRole.ADMIN]
+    roles: [UserRole.ADMIN],
+    children: [
+      {
+        label: 'Roles & Permission',
+        translationKey: 'navbar.rolesPermissions',
+        icon: 'key',
+        path: '/manage-users/roles-permission',
+        roles: [UserRole.ADMIN],
+      },
+      {
+        label: 'Session Manager',
+        translationKey: 'navbar.sessionManager',
+        icon: 'clock',
+        path: '/manage-users/session-manager',
+        roles: [UserRole.ADMIN],
+      },
+      {
+        label: 'User Access Policy',
+        translationKey: 'navbar.userAccessPolicy',
+        icon: 'shield',
+        path: '/manage-users/access-policy',
+        roles: [UserRole.ADMIN],
+      },
+    ],
   },
 
     {

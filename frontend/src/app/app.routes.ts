@@ -13,6 +13,7 @@ import { ResumesComponent } from './features/resumes/resumes.component';
 import { CandidateMatchingComponent } from './features/candidate-matching/candidate-matching.component';
 import { AdminComponent } from './features/admin/admin.component';
 import { ManageCompaniesComponent } from './features/admin/manage-companies.component/manage-companies.component';
+import { SessionManagerComponent } from './features/admin/manage-users.component/session-manager.component/session-manager.component';
 // import { RolesPermissionComponent } from './features/admin/roles-permission.component/roles-permission.component';
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'candidate-matching', component: CandidateMatchingComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'manage-companies', component:ManageCompaniesComponent},
+  { path: 'manage-users/session-manager', component: SessionManagerComponent},
   // { path: 'roles-permission', component:RolesPermissionComponent},
   { path: '**', redirectTo: '' }
 ];

@@ -5,6 +5,7 @@ import com.backend.jobconnectde.entity.*;
 import com.backend.jobconnectde.enums.RoleType;
 import com.backend.jobconnectde.repository.RoleRepository;
 import com.backend.jobconnectde.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserSessionService userSessionService; // ✅ inject our session tracker
+    private final HttpServletRequest httpRequest;        // ✅ inject current request
 
     public JwtResponse register(RegisterRequest request) {
         logger.info("Registering new user: {}", request.getEmail());
@@ -68,14 +71,10 @@ public class AuthService {
         logger.info("User login attempt: {}", request.getEmail());
 
         try {
-            // Authenticate user
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
             );
-
-            // ✅ FIX: Set authentication in SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
         } catch (BadCredentialsException e) {
             logger.warn("Invalid credentials for email: {}", request.getEmail());
             throw new BadCredentialsException("Invalid email or password");
@@ -87,6 +86,24 @@ public class AuthService {
         Role firstRole = user.getRoles().iterator().next();
         String token = jwtService.generateToken(user.getEmail(), firstRole.getName().name());
 
+        // ✅ Track this session in the database
+        try {
+            String ipAddress = getClientIp(httpRequest);
+            String userAgent = httpRequest.getHeader("User-Agent");
+
+            userSessionService.createSession(
+                    user.getEmail(),
+                    firstRole.getName().name(),
+                    ipAddress,
+                    userAgent
+            );
+
+            logger.info("Session created for {} from IP {} using {}", user.getEmail(), ipAddress, userAgent);
+
+        } catch (Exception e) {
+            logger.error("Failed to record user session for {}: {}", user.getEmail(), e.getMessage());
+        }
+
         return JwtResponse.builder()
                 .userId(user.getUid())
                 .token(token)
@@ -94,5 +111,14 @@ public class AuthService {
                 .role(firstRole.getName().name())
                 .fullName(user.getFullName())
                 .build();
+    }
+
+    /** 🔹 Helper method to detect correct client IP (handles reverse proxy/X-Forwarded-For headers) */
+    private String getClientIp(HttpServletRequest request) {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader != null && !xfHeader.isBlank()) {
+            return xfHeader.split(",")[0];
+        }
+        return request.getRemoteAddr();
     }
 }
